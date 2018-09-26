@@ -243,6 +243,11 @@ In the Statistics are of the page,
 I should also see three authors who have the highest-rated books
 ```
 
+```
+As a Developer
+I will spend additional time on HTML layout and styling
+to create a visually oustanding project
+```
 
 ## Rubric
 
@@ -304,6 +309,6 @@ Each paired team will have a rubric uploaded to [https://github.com/turingschool
  
 ### 10. Documentation
 
-* Exceeds Expectations: Excellent README which gives users an exemplary guide to the what your application is, how it's used, including screenshots, installation instructions, links to each project member's github, etc.
-* Meets Expectations: A custom README is present and gives users an guide to what your application is about
-* Below Expectations: This project is lacking a README
+* Exceeds Expectations: Excellent README which gives users an exemplary guide to the what your application is, how it's used, including screenshots, installation instructions, links to each project member's github, etc.. Supplied DTR is fully complete and professional
+* Meets Expectations: A custom README is present and gives users an guide to what your application is about; a DTR is included in the project's root folder as well per Turing's DTR template
+* Below Expectations: This project is lacking a README or DTR
