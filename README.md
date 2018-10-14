@@ -220,7 +220,7 @@ I can click on the name to go to that user's show page.
 
 ## Extensions
 
-If you finish the user stories above before the deadline, you are expected to attempt extension work.
+If you finish the user stories above before the deadline, you are expected to attempt extension work. Extensions should not be attempted until all other work is complete.
 
 ```
 As a Visitor,
@@ -239,7 +239,7 @@ I see additional links to sort their reviews in the following ways:
 ```
 As a Visitor,
 When I visit the book index page,
-In the Statistics are of the page,
+In the Statistics area of the page,
 I should also see three authors who have the highest-rated books
 ```
 
@@ -255,60 +255,32 @@ Each paired team will have a rubric uploaded to [https://github.com/turingschool
 
 ### 1. Feature Completeness
 
-* Exceeds Expectations: All features are correctly implemented along with one or more extensions
-* Meets Expectations: All features defined in the assignment are correctly implemented and project is deployed
-* Below Expectations: There are one or two features missing or incorrectly implemented and/or project is not fully deployed
+This will be a score out of 17, one per user story. Extensions will give you additional points, but should not be attemped until all other stories are complete.
 
-### 2. Views
+### 2. MVC Responsibilities
 
-* Exceeds Expectations: Views show logical refactoring into layout(s), partials and helpers, with no logic present
-* Meets Expectations: Views make use of layout(s), partials and helpers
-* Below Expectations: Views don't make use of partials or show weak understanding of rendering templates
+4. Views only display data and do not make additional calls to the database; they may include branch logic. Controllers request all data from Models except `.all` or `.find` calls and only do `.create` and `.delete` methods for writing data. Models read/write all other data using branch logic or smaller methods.
+3. Views make some calls to the database for `.each` calls and branch logic. Controllers push almost all work to the Models for reading/writing. Models sufficiently process and retrieve data.
+2. Views contain logic that make significant additional calls to the database including Model class methods. Controllers do a signficant amount of processing of data that should exist at a model level. Models process data in a way that is ineffcient, or contains work that determins presentation logic (how data might get viewed).
+1. Views, Controllers, and Models do not have a clear sense of resonsibilities.
 
-### 3. Controllers
+### 3. ActiveRecord
 
-* Exceeds Expectations: Controller code shows significant effort towards refactoring and pushing logic down the stack
-* Meets Expectations: Controller code is generally well organized with three or fewer methods that need refactoring
-* Below Expectations: There are many controller methods that should have been refactored
+4. Highly effective and efficient use of ActiveRecord beyond what we've taught in class or by this point in the Obstacle Course. Even calling `.each` methods will not cause additional database lookups from the database.
+3. ActiveRecord is used in a clear and effective way to read/write data using almost no Ruby to process data.
+2. Significant number of places where Ruby is used to process data that could use ActiveRecord instead.
+1. Little or no ActiveRecord methods are used to read/write data; Ruby code was written to process most data.
 
-### 4. Models
+### 4. Testing
 
-* Exceeds Expectations: Models show excellent organization, refactoring, and appropriate use of Rails features
-* Meets Expectations: Models show an effort to push logic down the stack, but need more internal refactoring
-* Below Expectations: Models are somewhat messy and/or make poor use of Rails features
+4. Very clear test-driven development. Test files are extremely well organized and nested and utilize `before(:each)` blocks for sharing test setups. 100% test coverage for features, and 100% of all model methods is tested.
+3. 98% or better test coverage for features, and all model methods are 100% tested.
+2. Many portions of code are missing tests.
+1. Testing is extremely poor, or not done.
 
-### 5. ActiveRecord
+### 5. User Experience and Styling/Layout
 
-* Exceeds Expectations: Best choice ActiveRecord methods are used to solve each problem
-* Meets Expectations: ActiveRecord is utilized wherever it can be. There is no Ruby where there should be ActiveRecord
-* Below Expectations: Ruby is used to programatically solve problems where ActiveRecord could be used
-
-### 6. Testing
-
-* Exceeds Expectations: Project has a running test suite that exercises the application at multiple levels and utilizes excellent setup and teardown to maximum productivity and minimize code
-* Meets Expectations: Project has a running test suite that covers all functionality and tests at multiple levels
-* Below Expectations: Project has sporadic use of tests at multiple levels
-
-### 7. Usability
-
-* Exceeds Expectations: Project is highly usable and ready to deploy to customers
-* Meets Expectations: Project is highly usable, but needs more polish before it'd be customer-ready
-* Below Expectations: Project needs more attention to the User Experience, some views need to use a URL to visit them
-
-### 8. Styling and Layout
-
-* Exceeds Expectations: Project utilizes HTML and CSS to its fullest
-* Meets Expectations: Project utilizes HTML and CSS but has some area for improvement
-* Below Expectations: Project utilizes little or no HTML or CSS
-
-### 9. Workflow
-
-* Exceeds Expectations: Excellent use of branches, pull requests, peer and instructor code review, and a project management tool.
-* Meets Expectations: Good use of branches, pull requests, peer and instructor code review, and a project management tool.
-* Below Expectations: Sporadic use of branches, pull requests, and/or project management tool.
- 
-### 10. Documentation
-
-* Exceeds Expectations: Excellent README which gives users an exemplary guide to the what your application is, how it's used, including screenshots, installation instructions, links to each project member's github, etc.. Supplied DTR is fully complete and professional
-* Meets Expectations: A custom README is present and gives users an guide to what your application is about; a DTR is included in the project's root folder as well per Turing's DTR template
-* Below Expectations: This project is lacking a README or DTR
+4. Extremely well styled and purposeful layout. Excellent color scheme and font usage. Easy to use and follow the application workflow. Utilizes additional tooling like SCSS.
+3. Added a purposeful styling pattern and HTML layout using `/app/views/application.html.erb` and `/app/assets/stylesheets/application.css`. User workflow is easy to use with links to reach all areas of the site.
+2. Styling is poor, or incomplete. Layout does not utilize good HTML patterns. User workflow has significant problems and URIs have to managed manually.
+1. Little or no styling or layout. User workflow is significantly problematic.
