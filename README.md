@@ -68,9 +68,9 @@ I should see one link each to sort the books by the following criteria:
 As a Visitor,
 When I visit the book index page,
 I see an area showing statistics about all books:
-- three of the highest-rated books
-- three of the worst-rated books
-- three users who have written the most reviews
+- three of the highest-rated books (book title and rating score)
+- three of the worst-rated books (book title and rating score)
+- three users who have written the most reviews (user name and review count)
 ```
 
 ### Book Show Page
@@ -112,6 +112,9 @@ Book titles should be converted to Title Case before saving.
 Book titles should be unique within the system.
 For authors, a comma-separated list of names should be entered,
 and each author will be added to the database.
+Authors added to the database should have their names converted
+to Title Case.
+Author Names should be unique within the system.
 ```
 
 ```
@@ -121,13 +124,14 @@ I see a link to add a new review for this book.
 When I click on this link, I am taken to a new review path.
 On this new page, I see a form where I can enter:
 - a review title
-- my name
+- my username as a string
 - a numeric rating that can only be a number from 1 to 5
 - some text for the review itself
 When the form is submitted, I should return to that book's
 show page and I should see my review text.
 
 User names should be converted to Title Case before saving.
+User names should be unique within the system.
 ```
 
 
@@ -137,8 +141,9 @@ User names should be converted to Title Case before saving.
 As a Visitor,
 When I visit an author's show page
 I see all book titles by that author
-And each book should show its number of pages and any other authors
-excluding the author that this show page is about.
+And each book should show its year of publication, number of 
+  pages and any other authors excluding the author that this show 
+  page is about.
 ```
 
 ```
