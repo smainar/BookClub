@@ -23,6 +23,8 @@ This purpose of this application is for users to browse and review books. The pr
 - must use PostgreSQL
 - all controller and model code must be tested via feature tests and model tests, respectively
 - must use some amount of HTML and CSS layout
+- project is hosted on Heroku
+
 
 ## Not Allowed
 
