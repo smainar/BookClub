@@ -260,37 +260,4 @@ to create a visually oustanding project
 
 Each paired team will have a rubric uploaded to [https://github.com/turingschool/ruby-submissions](https://github.com/turingschool/ruby-submissions)
 
-### Feature Completeness
-
-4 - All user stories are 100% complete and additional extension work was attempted.  
-3 - All user stories are 100% complete.  
-2 - At least 12 user stories are complete but not all stories are 100% finished.  
-1 - Fewer than 12 user stories are complete.
-
-### MVC Responsibilities
-
-4 - Views only display data and do not make additional calls to the database; they may include branch logic. Controllers request all data from Models except `.all` or `.find` calls and only do `.create` and `.delete` methods for writing data. Models read/write all other data using branch logic or smaller methods.  
-3 - Views make some calls to the database for `.each` calls and branch logic. Controllers push almost all work to the Models for reading/writing. Models sufficiently process and retrieve data.  
-2 - Views contain logic that make significant additional calls to the database including Model class methods. Controllers do a signficant amount of processing of data that should exist at a model level. Models process data in a way that is ineffcient, or contains work that determins presentation logic (how data might get viewed).  
-1 - Views, Controllers, and Models do not have a clear sense of resonsibilities.
-
-### ActiveRecord
-
-4 - Highly effective and efficient use of ActiveRecord beyond what we've taught in class or by this point in the Obstacle Course. Even calling `.each` methods will not cause additional database lookups from the database.  
-3 - ActiveRecord is used in a clear and effective way to read/write data using almost no Ruby to process data.  
-2 - Significant number of places where Ruby is used to process data that could use ActiveRecord instead.  
-1 - Little or no ActiveRecord methods are used to read/write data; Ruby code was written to process most data.
-
-### Testing
-
-4 - Very clear test-driven development. Test files are extremely well organized and nested and utilize `before(:each)` blocks for sharing test setups. 100% test coverage for features, and 100% of all model methods is tested.  
-3 - 98% or better test coverage for features, and all model methods are 100% tested.  
-2 - Many portions of code are missing tests.  
-1 - Testing is extremely poor, or not done.
-
-### User Experience and Styling/Layout
-
-4 - Extremely well styled and purposeful layout. Excellent color scheme and font usage. Easy to use and follow the application workflow. Utilizes additional tooling like SCSS.  
-3 - Added a purposeful styling pattern and HTML layout using `/app/views/application.html.erb` and `/app/assets/stylesheets/application.css`. User workflow is easy to use with links to reach all areas of the site.  
-2 - Styling is poor, or incomplete. Layout does not utilize good HTML patterns. User workflow has significant problems and URIs have to managed manually.  
-1 - Little or no styling or layout. User workflow is significantly problematic.
+View the [Book Club Rubric](Book_Club_Rubric.pdf)
