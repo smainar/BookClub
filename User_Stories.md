@@ -257,7 +257,7 @@ When the form is submitted, I should return to that book's
 show page and I should see my review text.
 
 User names should be converted to Title Case before saving.
-User names should be unique within the system.
+User names should be unique for that book (user can only give one review per book).
 ```
 
 ---
