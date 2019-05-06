@@ -11,10 +11,11 @@ This purpose of this application is for users to browse and review books. The pr
 ## Learning Goals for this Project
 
 - creation of a basic Rails web application
+- many to many relationship
 - implementing basic MVC structure to your project
 - save and retrieve data from a database
 - display content on a web page with some very basic styling
-- learning how to test your code effectively at a Controller and a Model level
+- learning how to test your code effectively at a Feature and a Model level
 
 
 ## Requirements
