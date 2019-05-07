@@ -1,6 +1,8 @@
+<body>
 <% @books.each do |book| %>
-  <h2><%= book.name %></h2>
-  <p><%= book.publication_year %></p>
-  <p><%= book.pages %></p>
-  <p><%= book.cover_image %></p>
+  <h2>Title: <%= book.title %></h2>
+  <p>Publication Year: <%= book.publication_year %></p>
+  <p>Pages: <%= book.pages %></p>
+  <img src=<%= book.cover_image %> alt= "<%= book.title %>" height="150" width="100" />
 <% end %>
+</body>
