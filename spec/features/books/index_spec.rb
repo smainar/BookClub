@@ -31,10 +31,14 @@ RSpec.describe "books index page", type: :feature do
 
     visit books_path
 
-    expect(page).to have_content(@book_1.average_rating)
-    expect(page).to have_content(@book_2.average_rating)
+    within "#book-#{@book_1.id}" do
+      expect(page).to have_content(@book_1.average_rating.to_f)
+      expect(page).to have_content(@book_1.review_count)
+    end
 
-    # expect(page).to have_content(@book_1.reviews_count)
-    # expect(page).to have_content(@book_2.reviews_count)
+    within "#book-#{@book_2.id}" do
+      expect(page).to have_content(@book_2.average_rating.to_f)
+      expect(page).to have_content(@book_2.review_count)
+    end
   end
 end

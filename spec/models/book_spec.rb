@@ -36,5 +36,15 @@ RSpec.describe Book, type: :model do
 
       expect(@book_2.average_rating.to_f).to eq(avg_rating_2)
     end
+
+    it ".review_count" do
+      review_count = 2
+
+      expect(@book_1.review_count).to eq(review_count)
+
+      review_count_2 = 1
+
+      expect(@book_2.review_count).to eq(review_count_2)
+    end
   end
 end
