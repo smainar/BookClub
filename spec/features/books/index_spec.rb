@@ -15,9 +15,22 @@ RSpec.describe "books index page", type: :feature do
     expect(page).to have_content(@book_1.publication_year)
     expect(page).to have_content(@book_1.pages)
     expect(page).to have_css("img[src='#{@book_1.cover_image}']")
+
     expect(page).to have_content(@book_2.title)
     expect(page).to have_content(@book_2.publication_year)
     expect(page).to have_content(@book_2.pages)
     expect(page).to have_css("img[src='#{@book_2.cover_image}']")
+  end
+
+# First test for User Story 7
+  it "visitor sees average book rating and total number of reviews for each book" do
+
+    visit "/books"
+
+    expect(page).to have_content(@book_1.average_rating)
+    expect(page).to have_content(@book_1.reviews_count)
+
+    expect(page).to have_content(@book_2.average_rating)
+    expect(page).to have_content(@book_2.reviews_count)
   end
 end
