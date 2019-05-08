@@ -9,7 +9,7 @@ RSpec.describe "books index page", type: :feature do
 
   it "visitor sees all book titles, author, pages, and year in database" do
 
-    visit "/books"
+    visit books_path
 
     expect(page).to have_content(@book_1.title)
     expect(page).to have_content(@book_1.publication_year)
@@ -25,7 +25,7 @@ RSpec.describe "books index page", type: :feature do
 # First test for User Story 7
   it "visitor sees average book rating and total number of reviews for each book" do
 
-    visit "/books"
+    visit books_path
 
     expect(page).to have_content(@book_1.average_rating)
     expect(page).to have_content(@book_1.reviews_count)
