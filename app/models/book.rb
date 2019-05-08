@@ -8,4 +8,7 @@ class Book < ApplicationRecord
                         :pages,
                         :cover_image
 
+  def average_rating
+    reviews.average(:rating)
+  end
 end

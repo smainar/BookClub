@@ -13,4 +13,28 @@ RSpec.describe Book, type: :model do
     it { should have_many(:authors).through(:book_authors) }
     it { should have_many :reviews }
   end
+
+  describe "class methods" do
+    before(:each) do
+      @book_1 = Book.create!(title: "Book 1", publication_year: 1999, pages: 100, cover_image: "book1.png")
+      @book_2 = Book.create!(title: "Book 2", publication_year: 2000, pages: 105, cover_image: "book2.png")
+      @book_3 = Book.create!(title: "Book 3", publication_year: 2001, pages: 110, cover_image: "book3.png")
+
+      @books = Book.all
+
+      @review_1 = @book_1.reviews.create!(username: "User 1", title: "Review Book 1.1", rating: 1, text: "Cool")
+      @review_2 = @book_1.reviews.create!(username: "User 2", title: "Review Book 1.2", rating: 2, text: "Cooler")
+      @review_3 = @book_2.reviews.create!(username: "User 3", title: "Review Book 3", rating: 3, text: "Coolest")
+    end
+
+    it ".average_rating" do
+      avg_rating = 1.5
+
+      expect(@book_1.average_rating.to_f).to eq(avg_rating)
+
+      avg_rating_2 = 3
+
+      expect(@book_2.average_rating.to_f).to eq(avg_rating_2)
+    end
+  end
 end
