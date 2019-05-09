@@ -8,11 +8,11 @@ RSpec.describe "books index page", type: :feature do
 
     @review_1 = @book_1.reviews.create!(username: "User 1", title: "Review Book 1.1", rating: 1, text: "Cool")
     @review_2 = @book_1.reviews.create!(username: "User 2", title: "Review Book 1.2", rating: 2, text: "Cooler")
-    @review_3 = @book_2.reviews.create!(username: "User 3", title: "Review Book 3", rating: 3, text: "Coolest")
+    @review_3 = @book_2.reviews.create!(username: "User 3", title: "Review Book 2", rating: 3, text: "Coolest")
+    @review_4 = @book_3.reviews.create!(username: "User 4", title: "Review Book 3.1", rating: 1, text: "Worst")
   end
 
-  it "visitor sees all book titles, author, pages, and year in database" do
-
+  it "displays all book titles, author, pages, and year in database" do
     visit books_path
 
     expect(page).to have_content(@book_1.title)
@@ -26,8 +26,7 @@ RSpec.describe "books index page", type: :feature do
     expect(page).to have_css("img[src='#{@book_2.cover_image}']")
   end
 
-  it "visitor sees average book rating and total number of reviews for each book" do
-
+  it "displays average book rating and total number of reviews for each book" do
     visit books_path
 
     within "#book-#{@book_1.id}" do
@@ -39,5 +38,62 @@ RSpec.describe "books index page", type: :feature do
       expect(page).to have_content(@book_2.average_rating.to_f.round(2))
       expect(page).to have_content(@book_2.review_count)
     end
+  end
+
+  it "displays all books sorted by average rating" do
+    visit books_path
+
+    click_on "Average Rating ascending"
+    expect(current_path).to eq(books_path)
+    expect(page.all('li')[0]).to have_content(@book_3.title)
+    expect(page.all('li')[1]).to have_content(@book_1.title)
+    expect(page.all('li')[2]).to have_content(@book_2.title)
+
+    visit books_path
+
+    click_on "Average Rating descending"
+    expect(current_path).to eq(books_path)
+    expect(page.all('li')[0]).to have_content(@book_2.title)
+    expect(page.all('li')[1]).to have_content(@book_1.title)
+    expect(page.all('li')[2]).to have_content(@book_3.title)
+  end
+
+  it "displays all books sorted by number of reviews" do
+    visit books_path
+
+    review_5 = @book_3.reviews.create!(username: "User 5", title: "Review Book 3.2", rating: 1, text: "Worst")
+    review_6 = @book_3.reviews.create!(username: "User 6", title: "Review Book 3.3", rating: 1, text: "Worst")
+
+    click_on "Number of Reviews ascending"
+    expect(current_path).to eq(books_path)
+    expect(page.all('li')[0]).to have_content(@book_2.title)
+    expect(page.all('li')[1]).to have_content(@book_1.title)
+    expect(page.all('li')[2]).to have_content(@book_3.title)
+
+    visit books_path
+
+    click_on "Number of Reviews descending"
+    expect(current_path).to eq(books_path)
+    expect(page.all('li')[0]).to have_content(@book_3.title)
+    expect(page.all('li')[1]).to have_content(@book_1.title)
+    expect(page.all('li')[2]).to have_content(@book_2.title)
+  end
+
+  it "displays all books sorted by page count" do
+    visit books_path
+
+    click_on "Page Number ascending"
+    expect(current_path).to eq(books_path)
+    expect(page.all('li')[0]).to have_content(@book_1.title)
+    expect(page.all('li')[1]).to have_content(@book_2.title)
+    expect(page.all('li')[2]).to have_content(@book_3.title)
+
+    visit books_path
+
+    click_on "Page Number descending"
+    expect(current_path).to eq(books_path)
+    expect(page.all('li')[0]).to have_content(@book_3.title)
+    expect(page.all('li')[1]).to have_content(@book_2.title)
+    expect(page.all('li')[2]).to have_content(@book_1.title)
   end
 end
