@@ -108,7 +108,7 @@ RSpec.describe "books index page", type: :feature do
 
     visit books_path
 
-    within ".statistics-highest-rated-" do
+    within ".statistics-highest-rated-book-" do
       expect(current_path).to eq(books_path)
       expect(page).to have_content(book_4.title)
       expect(page).to have_content(book_4.average_rating.to_f.round(1))
@@ -116,6 +116,16 @@ RSpec.describe "books index page", type: :feature do
       expect(page).to have_content(@book_2.average_rating.to_f.round(1))
       expect(page).to have_content(@book_1.title)
       expect(page).to have_content(@book_1.average_rating.to_f.round(1))
+    end
+
+    within ".statistics-worst-rated-book-" do
+      expect(current_path).to eq(books_path)
+      expect(page).to have_content(@book_3.title)
+      expect(page).to have_content(@book_3.average_rating.to_f.round(2))
+      expect(page).to have_content(@book_1.title)
+      expect(page).to have_content(@book_1.average_rating.to_f.round(2))
+      expect(page).to have_content(@book_2.title)
+      expect(page).to have_content(@book_2.average_rating.to_f.round(2))
     end
   end
 end

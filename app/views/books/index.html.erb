@@ -6,8 +6,14 @@
 <p><a class="button" href='/books?order_by_pages=desc'>Page Number descending</a></p>
 
 <h2>Statistics</h2>
-  <section class='statistics-highest-rated-'>
+  <section class='statistics-highest-rated-book-'>
     <% @books.highest_rated_books.each do |book| %>
+      <p>Title: <%= book.title %></p>
+      <p>Average Rating: <%= book.average_rating.to_f.round(1) %></p>
+    <% end %>
+  </section>
+  <section class='statistics-worst-rated-book-'>
+    <% @books.worst_rated_books.each do |book| %>
       <p>Title: <%= book.title %></p>
       <p>Average Rating: <%= book.average_rating.to_f.round(1) %></p>
     <% end %>

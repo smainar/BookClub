@@ -81,5 +81,14 @@ RSpec.describe Book, type: :model do
 
       expect(Book.highest_rated_books).to eq([book_4, @book_2, @book_1])
     end
+
+    it ".worst_rated_books" do
+      book_4 = Book.create!(title: "Book 3", publication_year: 2001, pages: 110, cover_image: "book3.png")
+
+      review_5 = book_4.reviews.create!(username: "User 5", title: "Review Book 4.1", rating: 4, text: "Best")
+      review_6 = book_4.reviews.create!(username: "User 6", title: "Review Book 4.2", rating: 5, text: "Bestest")
+
+      expect(Book.worst_rated_books).to eq([@book_3, @book_1, @book_2])
+    end
   end
 end
