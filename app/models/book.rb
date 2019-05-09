@@ -39,4 +39,8 @@ class Book < ApplicationRecord
       select('books.*').order(pages: :desc)
     end
   end
+
+  def self.highest_rated_books
+    select('books.*, avg(reviews.rating)').joins(:reviews).group('id').order('avg(reviews.rating) DESC').limit(3)
+  end
 end
