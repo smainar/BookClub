@@ -16,7 +16,7 @@ RSpec.describe "book show page", type: :feature do
     @review_3 = @book_2.reviews.create!(username: "User 3", title: "Review Book 3", rating: 3, text: "Coolest")
   end
 
-  it "displays the title, author, and pages for a specific book" do
+  it "displays the title, author, and page count for a specific book" do
 
     visit book_path(@book_1)
 
@@ -30,4 +30,21 @@ RSpec.describe "book show page", type: :feature do
 
     expect(page).to_not have_content(@book_2.title)
   end
+
+  it "displays a list of reviews - with title, user, rating, and text - for a specific book" do
+
+   visit book_path(@book_1)
+
+   expect(page).to have_content(@review_1.username)
+   expect(page).to have_content(@review_1.title)
+   expect(page).to have_content(@review_1.rating)
+   expect(page).to have_content(@review_1.text)
+
+   expect(page).to have_content(@review_2.username)
+   expect(page).to have_content(@review_2.title)
+   expect(page).to have_content(@review_2.rating)
+   expect(page).to have_content(@review_2.text)
+
+   expect(page).to_not have_content(@review_3.username)
+ end
 end

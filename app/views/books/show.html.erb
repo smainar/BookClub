@@ -5,3 +5,13 @@
   <p>Publication Year: <%= @book.publication_year %></p>
   <p>Pages: <%= @book.pages %></p>
   <img src="<%= @book.cover_image %>" alt= "<%= @book.title %>" height="150" width="100"/>
+
+<h2>Reviews</h2>
+  <% @book.reviews.each do |review| %>
+    <section id="review-info-<%= review.id%>">
+      <p>Review Title: <%= review.title %></p>
+      <p>Reviewer: <%= review.username %></p>
+      <p>Rating: <%= review.rating %></p>
+      <p>Comments: <%= review.text %></p>
+    </section>
+  <% end %>
