@@ -1,12 +1,20 @@
-<body>
-<% @books.each do |book| %>
- <section id='book-<%= book.id %>' >
-    <h2>Title: <%= book.title %></h2>
-    <p>Publication Year: <%= book.publication_year %></p>
-    <p>Pages: <%= book.pages %></p>
-    <p>Reviews: <%= book.review_count %></p>
-    <p>Average Rating: <%= book.average_rating.to_f %></p>
-    <img src=<%= book.cover_image %> alt= "<%= book.title %>" height="150" width="100" />
-  </section>
-<% end %>
-</body>
+<p><a class="button" href='/books?order_by_rating=asc'>Average Rating ascending</a></p>
+<p><a class="button" href='/books?order_by_rating=desc'>Average Rating descending</a></p>
+<p><a class="button" href='/books?order_by_reviews=asc'>Number of Reviews ascending</a></p>
+<p><a class="button" href='/books?order_by_reviews=desc'>Number of Reviews descending</a></p>
+<p><a class="button" href='/books?order_by_pages=asc'>Page Number ascending</a></p>
+<p><a class="button" href='/books?order_by_pages=desc'>Page Number descending</a></p>
+<ul id="books_list">
+  <% @books.each do |book| %>
+    <li>
+     <section id='book-<%= book.id %>' >
+        <h2>Title: <%= book.title %></h2>
+        <p>Publication Year: <%= book.publication_year %></p>
+        <p>Pages: <%= book.pages %></p>
+        <p>Reviews: <%= book.review_count %></p>
+        <p>Average Rating: <%= book.average_rating.to_f.round(1) %></p>
+        <img src=<%= book.cover_image %> alt= "<%= book.title %>" height="150" width="100" />
+      </section>
+    </li>
+  <% end %>
+</ul>
