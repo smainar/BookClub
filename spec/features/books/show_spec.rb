@@ -55,7 +55,6 @@ RSpec.describe "book show page", type: :feature do
  it "displays statistics for top 3 and bottom 3 reviews (title, rating, user) and the overall rating for a specific book" do
 
    visit book_path(@book_1)
-   save_and_open_page
 
    expect(page).to have_content(@book_1.average_rating.to_f.round(1))
    expect(current_path).to eq(book_path(@book_1))
