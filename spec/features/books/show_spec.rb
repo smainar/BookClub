@@ -52,8 +52,7 @@ RSpec.describe "book show page", type: :feature do
    expect(page).to_not have_content(@review_3.username)
  end
 
- it "displays statistics for top 3 reviews and bottom 3 reviews (title,rating,user) and the overall rating for a specific book" do
-
+ it "displays statistics for top 3 and bottom 3 reviews (title, rating, user) and the overall rating for a specific book" do
 
    visit book_path(@book_1)
    save_and_open_page
@@ -85,5 +84,4 @@ RSpec.describe "book show page", type: :feature do
      expect(page).to have_content(@review_2.username)
    end
  end
-
 end
