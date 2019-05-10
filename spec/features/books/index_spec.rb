@@ -129,35 +129,12 @@ RSpec.describe "books index page", type: :feature do
     end
   end
 
-    it "displays a link to add a new book that takes visitor to a new book path when clicked oh" do
+  it "displays a link to add a new book, which takes visitor to a new book path when clicked on" do
 
-      visit books_path
+    visit books_path
 
-      click_link "Add Book"
+    click_link "Add New Book"
 
-      expect(current_path).to eq(new_book_path)
-    end
-
-# As a Visitor,
-# When I visit the book index page,
-# I see a link that allows me to add a new book.
-# When I click that link, I am taken to a new book path.
-# I can fill in a form to add a new book.
-# The form includes the following items:
-# - title
-# - year book was published
-# - number of pages (0 or higher)
-# - image of the book cover (optional, can be left blank)
-# - a list of authors (see notes below)
-#
-# When I submit the form, I am taken to that book's show page.
-#
-# Book titles should be converted to Title Case before saving.
-# Book titles should be unique within the system.
-# For authors, a comma-separated list of names should be entered,
-# and each author will be added to the database.
-# Authors added to the database should have their names converted
-# to Title Case.
-# Author Names should be unique within the system.
-# If image field is left blank, a default image should be set.
+    expect(current_path).to eq(new_book_path)
+  end
 end
