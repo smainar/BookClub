@@ -6,6 +6,8 @@ RSpec.describe "books index page", type: :feature do
     @book_2 = Book.create!(title: "Book 2", publication_year: 2000, pages: 105, cover_image: "book2.png")
     @book_3 = Book.create!(title: "Book 3", publication_year: 2001, pages: 110, cover_image: "book3.png")
 
+    @books = Book.all
+
     @review_1 = @book_1.reviews.create!(username: "User 1", title: "Review Book 1.1", rating: 1, text: "Cool")
     @review_2 = @book_1.reviews.create!(username: "User 2", title: "Review Book 1.2", rating: 2, text: "Cooler")
     @review_3 = @book_2.reviews.create!(username: "User 3", title: "Review Book 2", rating: 3, text: "Coolest")
@@ -95,5 +97,35 @@ RSpec.describe "books index page", type: :feature do
     expect(page.all('li')[0]).to have_content(@book_3.title)
     expect(page.all('li')[1]).to have_content(@book_2.title)
     expect(page.all('li')[2]).to have_content(@book_1.title)
+  end
+
+  it "displays a statistics area with the three highest-rated and worst-rated books - with book title and average rating" do
+
+    book_4 = Book.create!(title: "Book 4", publication_year: 2002, pages: 115, cover_image: "book4.png")
+
+    review_5 = book_4.reviews.create!(username: "User 5", title: "Review Book 4.1", rating: 4, text: "Best")
+    review_6 = book_4.reviews.create!(username: "User 6", title: "Review Book 4.2", rating: 5, text: "Bestest")
+
+    visit books_path
+
+    within ".statistics-highest-rated-book-" do
+      expect(current_path).to eq(books_path)
+      expect(page).to have_content(book_4.title)
+      expect(page).to have_content(book_4.average_rating.to_f.round(1))
+      expect(page).to have_content(@book_2.title)
+      expect(page).to have_content(@book_2.average_rating.to_f.round(1))
+      expect(page).to have_content(@book_1.title)
+      expect(page).to have_content(@book_1.average_rating.to_f.round(1))
+    end
+
+    within ".statistics-worst-rated-book-" do
+      expect(current_path).to eq(books_path)
+      expect(page).to have_content(@book_3.title)
+      expect(page).to have_content(@book_3.average_rating.to_f.round(2))
+      expect(page).to have_content(@book_1.title)
+      expect(page).to have_content(@book_1.average_rating.to_f.round(2))
+      expect(page).to have_content(@book_2.title)
+      expect(page).to have_content(@book_2.average_rating.to_f.round(2))
+    end
   end
 end
