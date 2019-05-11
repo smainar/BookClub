@@ -6,6 +6,11 @@ RSpec.describe "books index page", type: :feature do
     @book_2 = Book.create!(title: "Book 2", publication_year: 2000, pages: 105, cover_image: "book2.png")
     @book_3 = Book.create!(title: "Book 3", publication_year: 2001, pages: 110, cover_image: "book3.png")
 
+    @author_1 = @book_1.authors.create!(name: "Author 1")
+    @author_2 = @book_1.authors.create!(name: "Author 2")
+    @author_3 = @book_2.authors.create!(name: "Author 3")
+    @author_4 = @book_3.authors.create!(name: "Author 4")
+
     @books = Book.all
 
     @review_1 = @book_1.reviews.create!(username: "User 1", title: "Review Book 1.1", rating: 1, text: "Cool")
@@ -14,15 +19,18 @@ RSpec.describe "books index page", type: :feature do
     @review_4 = @book_3.reviews.create!(username: "User 4", title: "Review Book 3.1", rating: 1, text: "Worst")
   end
 
-  it "displays all book titles, author, pages, and year in database" do
+  it "displays all book titles, authors, pages, and year in database" do
     visit books_path
 
     expect(page).to have_content(@book_1.title)
+    expect(page).to have_content(@author_1.name)
+    expect(page).to have_content(@author_2.name)
     expect(page).to have_content(@book_1.publication_year)
     expect(page).to have_content(@book_1.pages)
     expect(page).to have_css("img[src='#{@book_1.cover_image}']")
 
     expect(page).to have_content(@book_2.title)
+    expect(page).to have_content(@author_3.name)
     expect(page).to have_content(@book_2.publication_year)
     expect(page).to have_content(@book_2.pages)
     expect(page).to have_css("img[src='#{@book_2.cover_image}']")
