@@ -5,8 +5,7 @@ class Book < ApplicationRecord
 
   validates_presence_of :title,
                         :publication_year,
-                        :pages,
-                        :cover_image
+                        :pages
 
   def average_rating
     reviews.average(:rating)
@@ -46,5 +45,9 @@ class Book < ApplicationRecord
 
   def self.worst_rated_books
     select('books.*, avg(reviews.rating)').joins(:reviews).group('id').order('avg(reviews.rating)').limit(3)
+  end
+
+  def self.titles
+    select('books.titles').pluck(:title)
   end
 end
