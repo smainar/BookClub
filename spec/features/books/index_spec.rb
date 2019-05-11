@@ -128,4 +128,13 @@ RSpec.describe "books index page", type: :feature do
       expect(page).to have_content(@book_2.average_rating.to_f.round(2))
     end
   end
+
+  it "displays a link to add a new book, which takes visitor to a new book path when clicked on" do
+
+    visit books_path
+
+    click_link "Add New Book"
+
+    expect(current_path).to eq(new_book_path)
+  end
 end

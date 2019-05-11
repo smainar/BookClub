@@ -5,7 +5,6 @@ RSpec.describe Book, type: :model do
     it { should validate_presence_of :title }
     it { should validate_presence_of :publication_year }
     it { should validate_presence_of :pages }
-    it { should validate_presence_of :cover_image }
   end
 
   describe "relationships" do
@@ -89,6 +88,10 @@ RSpec.describe Book, type: :model do
       review_6 = book_4.reviews.create!(username: "User 6", title: "Review Book 4.2", rating: 5, text: "Bestest")
 
       expect(Book.worst_rated_books).to eq([@book_3, @book_1, @book_2])
+    end
+
+    it ".titles" do
+      expect(Book.titles).to eq([@book_1.title, @book_2.title, @book_3.title])
     end
   end
 end
