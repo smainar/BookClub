@@ -1,3 +1,5 @@
+<h1>New Book</h1>
+
 <%= form_for @book do |f| %>
   <%= f.label :title %>
   <%= f.text_field :title %>
@@ -9,7 +11,7 @@
   <%= f.number_field :pages %>
 
   <%= f.label :cover_image %>
-  <%= f.text_field :cover_image %>
+  <%= f.url_field :cover_image %>
 
   <%= f.label :authors %>
   <%= f.text_field :authors %>
