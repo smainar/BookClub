@@ -1,0 +1,19 @@
+<h1><%= @author.name %></h1>
+<% @author.books.each do |book| %>
+  <section id="book-<%= book.id %>">
+    <h2><%= book.title %></h2>
+    <img src="<%= book.cover_image %>" alt= "<%= book.title %>" height="150" width="100"/>
+    <p>Pages: <%= book.pages %><br>
+    Year: <%= book.publication_year %><br>
+    <% book.co_authors(@author.id).each do |author| %>
+      Co-author: <%= author.name %><br>
+    <% end %></p>
+    <% if book.reviews.first != nil %>
+      <% top_review = book.reviews.top_rated_review %>
+      <p>Top Rated Review: "<%= top_review.title %>"(<%= top_review.rating %>) by <%= top_review.username %>
+      </p>
+    <% else %>
+      <p>No reviews for this book. Be the first to leave a review!</p>
+    <% end %>
+  </section>
+<% end %>
