@@ -155,4 +155,43 @@ RSpec.describe "books index page", type: :feature do
 
     expect(current_path).to eq(new_book_path)
   end
+
+  it "each book title is a link" do
+    visit books_path
+
+    within "#book-#{@book_1.id}" do
+      expect(page).to have_link(@book_1.title)
+    end
+
+    within "#book-#{@book_2.id}" do
+      expect(page).to have_link(@book_2.title)
+    end
+
+    within "#book-#{@book_3.id}" do
+      expect(page).to have_link(@book_3.title)
+    end
+  end
+
+  it "the book title link takes the visitor to that book's show page" do
+    visit books_path
+
+    within "#book-#{@book_1.id}" do
+      click_link @book_1.title
+      expect(current_path).to eq(book_path(@book_1))
+    end
+
+    visit books_path
+
+    within "#book-#{@book_2.id}" do
+      click_link @book_2.title
+      expect(current_path).to eq(book_path(@book_2))
+    end
+
+    visit books_path
+
+    within "#book-#{@book_3.id}" do
+      click_link @book_3.title
+      expect(current_path).to eq(book_path(@book_3))
+    end
+  end
 end
