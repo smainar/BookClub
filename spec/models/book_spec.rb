@@ -21,15 +21,20 @@ RSpec.describe Book, type: :model do
 
       @books = Book.all
 
-      @review_1 = @book_1.reviews.create!(username: "User 1", title: "Review Book 1.1", rating: 1, text: "Cool")
-      @review_2 = @book_1.reviews.create!(username: "User 2", title: "Review Book 1.2", rating: 2, text: "Cooler")
-      @review_3 = @book_2.reviews.create!(username: "User 3", title: "Review Book 2", rating: 3, text: "Coolest")
-      @review_4 = @book_3.reviews.create!(username: "User 4", title: "Review Book 3", rating: 1, text: "Worst")
+      @user_1 = User.create!(username: "User 1")
+      @user_2 = User.create!(username: "User 2")
+      @user_3 = User.create!(username: "User 3")
+      @user_4 = User.create!(username: "User 4")
+
+      @review_1 = @book_1.reviews.create!(user: @user_1, title: "Review Book 1.1", rating: 1, text: "Cool")
+      @review_2 = @book_1.reviews.create!(user: @user_2, title: "Review Book 1.2", rating: 2, text: "Cooler")
+      @review_3 = @book_2.reviews.create!(user: @user_3, title: "Review Book 2", rating: 3, text: "Coolest")
+      @review_4 = @book_3.reviews.create!(user: @user_4, title: "Review Book 3", rating: 1, text: "Worst")
     end
 
     it ".average_rating" do
-      expect(@book_1.average_rating.to_f).to eq(1.5)
-      expect(@book_2.average_rating.to_f).to eq(3)
+      expect(@book_1.average_rating).to eq(1.5)
+      expect(@book_2.average_rating).to eq(3)
     end
 
     it ".review_count" do
@@ -46,12 +51,15 @@ RSpec.describe Book, type: :model do
 
       @books = Book.all
 
-      @review_1 = @book_1.reviews.create!(username: "User 1", title: "Review Book 1.1", rating: 1, text: "Cool")
-      @review_2 = @book_1.reviews.create!(username: "User 2", title: "Review Book 1.2", rating: 2, text: "Cooler")
-      @review_3 = @book_2.reviews.create!(username: "User 3", title: "Review Book 2", rating: 3, text: "Coolest")
-      @review_4 = @book_3.reviews.create!(username: "User 4", title: "Review Book 3", rating: 1, text: "Worst")
+      @user_1 = User.create!(username: "User 1")
+      @user_2 = User.create!(username: "User 2")
+      @user_3 = User.create!(username: "User 3")
+      @user_4 = User.create!(username: "User 4")
 
-      @reviews = Review.all
+      @review_1 = @book_1.reviews.create!(user: @user_1, title: "Review Book 1.1", rating: 1, text: "Cool")
+      @review_2 = @book_1.reviews.create!(user: @user_2, title: "Review Book 1.2", rating: 2, text: "Cooler")
+      @review_3 = @book_2.reviews.create!(user: @user_3, title: "Review Book 2", rating: 3, text: "Coolest")
+      @review_4 = @book_3.reviews.create!(user: @user_4, title: "Review Book 3", rating: 1, text: "Worst")
     end
 
     it ".order_average_rating" do
@@ -60,8 +68,12 @@ RSpec.describe Book, type: :model do
     end
 
     it ".order_review_count" do
-      review_5 = @book_3.reviews.create!(username: "User 5", title: "Review Book 3.2", rating: 1, text: "Worst")
-      review_6 = @book_3.reviews.create!(username: "User 6", title: "Review Book 3.3", rating: 1, text: "Worst")
+
+      user_5 = User.create!(username: "User 5")
+      user_6 = User.create!(username: "User 6")
+
+      review_5 = @book_3.reviews.create!(user: user_5, title: "Review Book 3.2", rating: 1, text: "Worst")
+      review_6 = @book_3.reviews.create!(user: user_6, title: "Review Book 3.3", rating: 1, text: "Worst")
 
       expect(@books.order_review_count("asc")).to eq([@book_2, @book_1, @book_3])
       expect(@books.order_review_count("desc")).to eq([@book_3, @book_1, @book_2])
@@ -73,19 +85,27 @@ RSpec.describe Book, type: :model do
     end
 
     it ".highest_rated_books" do
+
+      user_5 = User.create!(username: "User 5")
+      user_6 = User.create!(username: "User 6")
+
       book_4 = Book.create!(title: "Book 3", publication_year: 2001, pages: 110, cover_image: "book3.png")
 
-      review_5 = book_4.reviews.create!(username: "User 5", title: "Review Book 4.1", rating: 4, text: "Best")
-      review_6 = book_4.reviews.create!(username: "User 6", title: "Review Book 4.2", rating: 5, text: "Bestest")
+      review_5 = book_4.reviews.create!(user: user_5, title: "Review Book 4.1", rating: 4, text: "Best")
+      review_6 = book_4.reviews.create!(user: user_6, title: "Review Book 4.2", rating: 5, text: "Bestest")
 
       expect(Book.highest_rated_books).to eq([book_4, @book_2, @book_1])
     end
 
     it ".worst_rated_books" do
+
       book_4 = Book.create!(title: "Book 3", publication_year: 2001, pages: 110, cover_image: "book3.png")
 
-      review_5 = book_4.reviews.create!(username: "User 5", title: "Review Book 4.1", rating: 4, text: "Best")
-      review_6 = book_4.reviews.create!(username: "User 6", title: "Review Book 4.2", rating: 5, text: "Bestest")
+      user_5 = User.create!(username: "User 5")
+      user_6 = User.create!(username: "User 6")
+
+      review_5 = book_4.reviews.create!(user: user_5, title: "Review Book 4.1", rating: 4, text: "Best")
+      review_6 = book_4.reviews.create!(user: user_6, title: "Review Book 4.2", rating: 5, text: "Bestest")
 
       expect(Book.worst_rated_books).to eq([@book_3, @book_1, @book_2])
     end
