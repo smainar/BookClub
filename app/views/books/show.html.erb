@@ -7,10 +7,12 @@
   <img src="<%= @book.cover_image %>" alt= "<%= @book.title %>" height="150" width="100"/>
 
 <h2>Reviews</h2>
+<p> <%= link_to "Write a Review", new_book_review_path(@book) %> </p>
+
   <% @book.reviews.each do |review| %>
     <section id="review-info-<%= review.id%>">
       <p>Review Title: <%= review.title %></p>
-      <p>Reviewer: <%= review.user %></p>
+      <p>Reviewer: <%= review.user.username %></p>
       <p>Rating: <%= review.rating %></p>
       <p>Comments: <%= review.text %></p>
     </section>

@@ -90,4 +90,12 @@ RSpec.describe "book show page", type: :feature do
      expect(page).to have_content(@review_2.user.username)
    end
  end
+
+ it "displays a link to add a new review for that book, which takes visitor to a new review path when clicked on" do
+   visit book_path(@book_1)
+
+   click_link "Write a Review"
+
+   expect(current_path).to eq(new_book_review_path(@book_1))
+ end
 end
