@@ -11,14 +11,14 @@
   <section class='statistics-highest-rated-book-'>
 <h3>Highest Rated Books (Top 3):</h3>
     <% @highest_rated_books.each do |book| %>
-      <p>Title: <%= book.title %></p>
+      <p>Title: <%= link_to book.title, book_path(book) %></p>
       <p>Average Rating: <%= book.average_rating.to_f.round(1) %></p>
     <% end %>
   </section>
   <h3>Worst Rated Books (Bottom 3):</h3>
   <section class='statistics-worst-rated-book-'>
     <% @worst_rated_books.each do |book| %>
-      <p>Title: <%= book.title %></p>
+      <p>Title: <%= link_to book.title, book_path(book) %></p>
       <p>Average Rating: <%= book.average_rating.to_f.round(1) %></p>
     <% end %>
   </section>
@@ -28,7 +28,7 @@
   <% @books.each do |book| %>
     <li>
      <section id='book-<%= book.id %>' >
-        <h2>Title: <%= book.title %></h2>
+        <h2>Title: <%= link_to book.title, book_path(book) %></h2>
         <% book.authors.each do |author| %>
           <p>By: <%= author.name %>
         <% end %>
