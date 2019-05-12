@@ -19,6 +19,10 @@ class Book < ApplicationRecord
     authors.where.not(id: author_id)
   end
 
+  def repeat_user(user_id)
+    reviews.exists?(user_id: user_id)
+  end
+
   def self.order_average_rating(order_by_rating)
     if order_by_rating == "asc"
       select('books.*, avg(reviews.rating)').joins(:reviews).group('id').order('avg(reviews.rating)')

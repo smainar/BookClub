@@ -49,6 +49,11 @@ RSpec.describe Book, type: :model do
     it ".co_authors" do
       expect(@book_3.co_authors(@author_1.id)).to eq([@author_2])
     end
+
+    it ".repeat_user" do
+      expect(@book_1.repeat_user(@user_1.id)).to eq(true)
+      expect(@book_3.repeat_user(@user_3.id)).to eq(false)
+    end
   end
 
   describe "class methods" do
