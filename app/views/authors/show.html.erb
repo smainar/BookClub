@@ -10,7 +10,7 @@
     <% end %></p>
     <% if book.reviews.first != nil %>
       <% top_review = book.reviews.top_rated_review %>
-      <p>Top Rated Review: "<%= top_review.title %>"(<%= top_review.rating %>) by <%= top_review.username %>
+      <p>Top Rated Review: "<%= top_review.title %>"(<%= top_review.rating %>) by <%= top_review.user.username %>
       </p>
     <% else %>
       <p>No reviews for this book. Be the first to leave a review!</p>

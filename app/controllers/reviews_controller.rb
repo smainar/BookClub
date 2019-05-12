@@ -9,8 +9,8 @@ class ReviewsController < ApplicationController
     book = Book.find(params[:book_id])
     user = User.find_or_create_by(username: params[:review][:name].titleize)
     review = user.reviews.new(review_params)
-    if user.reviews.pluck(:book_id).include?(book) || review_params == nil
-      flash.notice = "You have already left a review for this book."
+    if book.repeat_user(user.id) || review_params.any?{|key,value| value.nil?}
+      flash.notice = "Error."
       redirect_to book_path(book)
     else
       review.save
