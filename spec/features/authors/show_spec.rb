@@ -11,9 +11,13 @@ RSpec.describe "author show page", type: :feature do
     @book_3 = Book.create!(title: "Book 3", publication_year: 2001, pages: 110, cover_image: "book3.png", authors:[@author_1, @author_2])
     @book_4 = @author_3.books.create!(title: "Book 4", publication_year: 2002, pages: 120, cover_image: "book4.png")
 
-    @review_1 = Review.create!(username: "User 1", title: "Review Book 1.1", rating: 1, text: "Worst", book: @book_1)
-    @review_2 = Review.create!(username: "User 2", title: "Review Book 1.2", rating: 4, text: "Best", book: @book_1)
-    @review_3 = Review.create!(username: "User 3", title: "Review Book 2", rating: 5, text: "Best", book: @book_2)
+    @user_1 = User.create!(username: "User 1")
+    @user_2 = User.create!(username: "User 2")
+    @user_3 = User.create!(username: "User 3")
+
+    @review_1 = @user_1.reviews.create!(title: "Review Book 1.1", rating: 1, text: "Worst", book: @book_1)
+    @review_2 = @user_2.reviews.create!(title: "Review Book 1.2", rating: 4, text: "Best", book: @book_1)
+    @review_3 = @user_3.reviews.create!(title: "Review Book 2", rating: 5, text: "Best", book: @book_2)
   end
 
   it 'displays all books by that author with title, pages, publication year, cover image, and co-authors' do
@@ -62,7 +66,7 @@ RSpec.describe "author show page", type: :feature do
       expect(page).to have_content(@book_1.title)
       expect(page).to have_content(@review_2.title)
       expect(page).to have_content(@review_2.rating)
-      expect(page).to have_content(@review_2.username)
+      expect(page).to have_content(@review_2.user.username)
       expect(page).to_not have_content(@review_1.title)
       expect(page).to_not have_content(@review_3.title)
     end
@@ -71,7 +75,7 @@ RSpec.describe "author show page", type: :feature do
       expect(page).to have_content(@book_2.title)
       expect(page).to have_content(@review_3.title)
       expect(page).to have_content(@review_3.rating)
-      expect(page).to have_content(@review_3.username)
+      expect(page).to have_content(@review_3.user.username)
       expect(page).to_not have_content(@review_1.title)
       expect(page).to_not have_content(@review_2.title)
     end
