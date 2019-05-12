@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe "new book form", type: :feature do
   it "displays a form to add a new book - includes title, publication year, pages, cover image (optional), and authors" do
-
     visit new_book_path
 
     fill_in "book[title]", with: "the talisman"

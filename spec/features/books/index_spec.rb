@@ -6,17 +6,22 @@ RSpec.describe "books index page", type: :feature do
     @book_2 = Book.create!(title: "Book 2", publication_year: 2000, pages: 105, cover_image: "book2.png")
     @book_3 = Book.create!(title: "Book 3", publication_year: 2001, pages: 110, cover_image: "book3.png")
 
+    @books = Book.all
+
     @author_1 = @book_1.authors.create!(name: "Author 1")
     @author_2 = @book_1.authors.create!(name: "Author 2")
     @author_3 = @book_2.authors.create!(name: "Author 3")
     @author_4 = @book_3.authors.create!(name: "Author 4")
 
-    @books = Book.all
+    @user_1 = User.create!(username: "User 1")
+    @user_2 = User.create!(username: "User 2")
+    @user_3 = User.create!(username: "User 3")
+    @user_4 = User.create!(username: "User 4")
 
-    @review_1 = @book_1.reviews.create!(username: "User 1", title: "Review Book 1.1", rating: 1, text: "Cool")
-    @review_2 = @book_1.reviews.create!(username: "User 2", title: "Review Book 1.2", rating: 2, text: "Cooler")
-    @review_3 = @book_2.reviews.create!(username: "User 3", title: "Review Book 2", rating: 3, text: "Coolest")
-    @review_4 = @book_3.reviews.create!(username: "User 4", title: "Review Book 3.1", rating: 1, text: "Worst")
+    @review_1 = @book_1.reviews.create!(user: @user_1, title: "Review Book 1.1", rating: 1, text: "Cool")
+    @review_2 = @book_1.reviews.create!(user: @user_2, title: "Review Book 1.2", rating: 2, text: "Cooler")
+    @review_3 = @book_2.reviews.create!(user: @user_3, title: "Review Book 2", rating: 3, text: "Coolest")
+    @review_4 = @book_3.reviews.create!(user: @user_4, title: "Review Book 3.1", rating: 1, text: "Worst")
   end
 
   it "displays all book titles, authors, pages, and year in database" do
@@ -71,8 +76,11 @@ RSpec.describe "books index page", type: :feature do
   it "displays all books sorted by number of reviews" do
     visit books_path
 
-    review_5 = @book_3.reviews.create!(username: "User 5", title: "Review Book 3.2", rating: 1, text: "Worst")
-    review_6 = @book_3.reviews.create!(username: "User 6", title: "Review Book 3.3", rating: 1, text: "Worst")
+    user_5 = User.create!(username: "User 5")
+    user_6 = User.create!(username: "User 6")
+
+    review_5 = @book_3.reviews.create!(user: user_5, title: "Review Book 3.2", rating: 1, text: "Worst")
+    review_6 = @book_3.reviews.create!(user: user_6, title: "Review Book 3.3", rating: 1, text: "Worst")
 
     click_on "Number of Reviews ascending"
     expect(current_path).to eq(books_path)
@@ -111,8 +119,11 @@ RSpec.describe "books index page", type: :feature do
 
     book_4 = Book.create!(title: "Book 4", publication_year: 2002, pages: 115, cover_image: "book4.png")
 
-    review_5 = book_4.reviews.create!(username: "User 5", title: "Review Book 4.1", rating: 4, text: "Best")
-    review_6 = book_4.reviews.create!(username: "User 6", title: "Review Book 4.2", rating: 5, text: "Bestest")
+    user_5 = User.create!(username: "User 5")
+    user_6 = User.create!(username: "User 6")
+
+    review_5 = book_4.reviews.create!(user: user_5, title: "Review Book 4.1", rating: 4, text: "Best")
+    review_6 = book_4.reviews.create!(user: user_6, title: "Review Book 4.2", rating: 5, text: "Bestest")
 
     visit books_path
 
@@ -138,7 +149,6 @@ RSpec.describe "books index page", type: :feature do
   end
 
   it "displays a link to add a new book, which takes visitor to a new book path when clicked on" do
-
     visit books_path
 
     click_link "Add New Book"
