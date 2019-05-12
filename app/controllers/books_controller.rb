@@ -24,7 +24,7 @@ class BooksController < ApplicationController
   def create
     book_title = book_params[:title].strip.downcase.titleize
     books = Book.all
-    if books.titles.include?(book_title) || book_params[:pages].to_i <= 0
+    if books.titles.include?(book_title) || book_params[:pages].to_i <= 0 || book_params == nil
       flash.notice = "Invalid entry. Please try again."
       redirect_to new_book_path
     else
