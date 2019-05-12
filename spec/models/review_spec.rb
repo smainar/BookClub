@@ -36,5 +36,9 @@ RSpec.describe Review, type: :model do
     it '.bottom_reviews' do
       expect(@reviews.bottom_reviews).to eq([@review_1, @review_3, @review_4])
     end
+
+    it '.top_rated_review' do
+      expect(@reviews.top_rated_review).to eq(@review_2)
+    end
   end
 end

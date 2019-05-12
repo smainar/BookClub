@@ -15,10 +15,13 @@ RSpec.describe Book, type: :model do
 
   describe "instance methods" do
     before(:each) do
+      @author_1 = Author.create!(name: "Author 1")
+      @author_2 = Author.create!(name: "Author 2")
+      @author = Author.all
+
       @book_1 = Book.create!(title: "Book 1", publication_year: 1999, pages: 100, cover_image: "book1.png")
       @book_2 = Book.create!(title: "Book 2", publication_year: 2000, pages: 105, cover_image: "book2.png")
-      @book_3 = Book.create!(title: "Book 3", publication_year: 2001, pages: 110, cover_image: "book3.png")
-
+      @book_3 = Book.create!(title: "Book 3", publication_year: 2001, pages: 110, cover_image: "book3.png", authors:[@author_1, @author_2])
       @books = Book.all
 
       @user_1 = User.create!(username: "User 1")
@@ -30,6 +33,7 @@ RSpec.describe Book, type: :model do
       @review_2 = @book_1.reviews.create!(user: @user_2, title: "Review Book 1.2", rating: 2, text: "Cooler")
       @review_3 = @book_2.reviews.create!(user: @user_3, title: "Review Book 2", rating: 3, text: "Coolest")
       @review_4 = @book_3.reviews.create!(user: @user_4, title: "Review Book 3", rating: 1, text: "Worst")
+      @reviews = Review.all
     end
 
     it ".average_rating" do
@@ -40,6 +44,10 @@ RSpec.describe Book, type: :model do
     it ".review_count" do
       expect(@book_1.review_count).to eq(2)
       expect(@book_2.review_count).to eq(1)
+    end
+
+    it ".co_authors" do
+      expect(@book_3.co_authors(@author_1.id)).to eq([@author_2])
     end
   end
 
