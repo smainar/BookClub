@@ -15,12 +15,10 @@ RSpec.describe "new review form", type: :feature do
     it "returns to that book's show page, after the form is submitted, and displays the review" do
       visit new_book_review_path(@book_1)
 
-      fill_in "review[title]", with: @review_1.title
-      fill_in "review[name]", with: @review_1.user.username
-      select("#{@review_1.rating}", from: "review[rating]")
-      fill_in "review[text]", with: @review_1.text
-
-
+      fill_in "review[title]", with: "Hello"
+      fill_in "review[name]", with: "User 42"
+      select("5", from: "review[rating]")
+      fill_in "review[text]", with: "Hello World"
       click_on "Submit Review"
 
       new_review = Review.last
@@ -31,6 +29,49 @@ RSpec.describe "new review form", type: :feature do
       expect(page).to have_content(new_review.user.username)
       expect(page).to have_content(new_review.rating)
       expect(page).to have_content(new_review.text)
+    end
+
+    it "returns to that book's show page, after the form is submitted with untitleized username, and displays the username titleized" do
+      visit new_book_review_path(@book_1)
+
+      fill_in "review[title]", with: "Hello"
+      fill_in "review[name]", with: "UsER 42"
+      select("5", from: "review[rating]")
+      fill_in "review[text]", with: "Hello World"
+      click_on "Submit Review"
+
+      new_review = Review.last
+
+      expect(current_path).to eq(book_path(@book_1))
+      expect(page).to have_content(new_review.user.username)
+    end
+
+    it "returns to that book's show page, after the form is submitted with existing user, and displays error" do
+      visit new_book_review_path(@book_1)
+
+      fill_in "review[title]", with: "Hello"
+      fill_in "review[name]", with: @review_1.user.username
+      select("5", from: "review[rating]")
+      fill_in "review[text]", with: "Hello World"
+      click_on "Submit Review"
+
+      expect(current_path).to eq(book_path(@book_1))
+      expect(page).to have_content("Error.")
+      expect(page).to_not have_content("Hello World")
+    end
+
+    it "returns to that book's show page, after the form is submitted with empty param, and displays error" do
+      visit new_book_review_path(@book_1)
+
+      fill_in "review[title]", with: ""
+      fill_in "review[name]", with: "User 42"
+      select("5", from: "review[rating]")
+      fill_in "review[text]", with: "Hello World"
+      click_on "Submit Review"
+
+      expect(current_path).to eq(book_path(@book_1))
+      expect(page).to have_content("Error.")
+      expect(page).to_not have_content("Hello World")
     end
   end
 end
