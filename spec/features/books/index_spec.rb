@@ -194,4 +194,34 @@ RSpec.describe "books index page", type: :feature do
       expect(current_path).to eq(book_path(@book_3))
     end
   end
+
+  it "the author names(s) are a link, which takes the visitor to that author's show page" do
+    visit books_path
+
+    within "#book-#{@book_1.id}" do
+      click_link @author_1.name
+      expect(current_path).to eq(author_path(@author_1))
+    end
+
+    visit books_path
+
+    within "#book-#{@book_1.id}" do
+      click_link @author_2.name
+      expect(current_path).to eq(author_path(@author_2))
+    end
+
+    visit books_path
+
+    within "#book-#{@book_2.id}" do
+      click_link @author_3.name
+      expect(current_path).to eq(author_path(@author_3))
+    end
+
+    visit books_path
+
+    within "#book-#{@book_3.id}" do
+      click_link @author_4.name
+      expect(current_path).to eq(author_path(@author_4))
+    end
+  end
 end

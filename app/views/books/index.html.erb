@@ -30,7 +30,7 @@
      <section id='book-<%= book.id %>' >
         <h2>Title: <%= link_to book.title, book_path(book) %></h2>
         <% book.authors.each do |author| %>
-          <p>By: <%= author.name %>
+          <p>By: <%= link_to author.name, author_path(author) %></p>
         <% end %>
         <p>Publication Year: <%= book.publication_year %></p>
         <p>Pages: <%= book.pages %></p>
