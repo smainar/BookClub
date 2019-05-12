@@ -13,4 +13,8 @@ class Review < ApplicationRecord
   def self.bottom_reviews
     select('reviews.*').order(:rating).limit(3)
   end
+
+  def self.top_rated_review
+    select('reviews.*').order(rating: :desc).first
+  end
 end
