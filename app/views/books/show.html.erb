@@ -7,10 +7,12 @@
   <img src="<%= @book.cover_image %>" alt= "<%= @book.title %>" height="150" width="100"/>
 
 <h2>Reviews</h2>
+<p> <%= link_to "Write a Review", new_book_review_path(@book) %> </p>
+
   <% @book.reviews.each do |review| %>
     <section id="review-info-<%= review.id%>">
       <p>Review Title: <%= review.title %></p>
-      <p>Reviewer: <%= review.username %></p>
+      <p>Reviewer: <%= review.user.username %></p>
       <p>Rating: <%= review.rating %></p>
       <p>Comments: <%= review.text %></p>
     </section>
@@ -21,14 +23,14 @@
     <section id="top-reviews">
       <h3>Top Reviews</h3>
       <% @book.reviews.top_reviews.each do |review| %>
-        <h4><%= review.username %></h4>
+        <h4><%= review.user.username %></h4>
         <h4><%= review.title %> (<%= review.rating %>)</h4>
       <% end %>
     </section>
     <section id="bottom-reviews">
       <h3>Bottom Reviews</h3>
       <% @book.reviews.bottom_reviews.each do |review| %>
-        <h4><%= review.username %></h4>
+        <h4><%= review.user.username %></h4>
         <h4><%= review.title %> (<%= review.rating %>)</h4>
       <% end %>
     </section>

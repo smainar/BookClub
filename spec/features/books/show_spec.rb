@@ -11,17 +11,22 @@ RSpec.describe "book show page", type: :feature do
     @author_3 = @book_2.authors.create!(name: "Author 3")
     @author_4 = @book_3.authors.create!(name: "Author 4")
 
-    @review_1 = @book_1.reviews.create!(username: "User 1", title: "Review Book 1.1", rating: 1, text: "Cool")
-    @review_2 = @book_1.reviews.create!(username: "User 2", title: "Review Book 1.2", rating: 2, text: "Cooler")
-    @review_3 = @book_2.reviews.create!(username: "User 3", title: "Review Book 3", rating: 3, text: "Coolest")
-    @review_4 = @book_1.reviews.create!(username: "User 1", title: "Review Book 1.3", rating: 5, text: "Best book ever")
-    @review_5 = @book_1.reviews.create!(username: "User 2", title: "Review Book 1.4", rating: 2, text: "Pretty bad")
-    @review_6 = @book_1.reviews.create!(username: "User 4", title: "Review Book 1.5", rating: 4, text: "Fun book")
-    @review_7 = @book_1.reviews.create!(username: "User 5", title: "Review Book 1.6", rating: 5, text: "Favorite book")
+    @user_1 = User.create!(username: "User 1")
+    @user_2 = User.create!(username: "User 2")
+    @user_3 = User.create!(username: "User 3")
+    @user_4 = User.create!(username: "User 4")
+    @user_5 = User.create!(username: "User 5")
+
+    @review_1 = @book_1.reviews.create!(user: @user_1, title: "Review Book 1.1", rating: 1, text: "Cool")
+    @review_2 = @book_1.reviews.create!(user: @user_2, title: "Review Book 1.2", rating: 2, text: "Cooler")
+    @review_3 = @book_2.reviews.create!(user: @user_3, title: "Review Book 3", rating: 3, text: "Coolest")
+    @review_4 = @book_1.reviews.create!(user: @user_1, title: "Review Book 1.3", rating: 5, text: "Best book ever")
+    @review_5 = @book_1.reviews.create!(user: @user_2, title: "Review Book 1.4", rating: 2, text: "Pretty bad")
+    @review_6 = @book_1.reviews.create!(user: @user_4, title: "Review Book 1.5", rating: 4, text: "Fun book")
+    @review_7 = @book_1.reviews.create!(user: @user_5, title: "Review Book 1.6", rating: 5, text: "Favorite book")
   end
 
   it "displays the title, author, and page count for a specific book" do
-
     visit book_path(@book_1)
 
     expect(page).to have_content(@book_1.title)
@@ -36,24 +41,22 @@ RSpec.describe "book show page", type: :feature do
   end
 
   it "displays a list of reviews - with title, user, rating, and text - for a specific book" do
-
    visit book_path(@book_1)
 
-   expect(page).to have_content(@review_1.username)
+   expect(page).to have_content(@review_1.user.username)
    expect(page).to have_content(@review_1.title)
    expect(page).to have_content(@review_1.rating)
    expect(page).to have_content(@review_1.text)
 
-   expect(page).to have_content(@review_2.username)
+   expect(page).to have_content(@review_2.user.username)
    expect(page).to have_content(@review_2.title)
    expect(page).to have_content(@review_2.rating)
    expect(page).to have_content(@review_2.text)
 
-   expect(page).to_not have_content(@review_3.username)
+   expect(page).to_not have_content(@review_3.user.username)
  end
 
  it "displays statistics for top 3 and bottom 3 reviews (title, rating, user) and the overall rating for a specific book" do
-
    visit book_path(@book_1)
 
    expect(page).to have_content(@book_1.average_rating.to_f.round(1))
@@ -62,25 +65,37 @@ RSpec.describe "book show page", type: :feature do
    within "#top-reviews" do
      expect(page).to have_content(@review_4.title)
      expect(page).to have_content(@review_4.rating)
-     expect(page).to have_content(@review_4.username)
+     expect(page).to have_content(@review_4.user.username)
+
      expect(page).to have_content(@review_7.title)
      expect(page).to have_content(@review_7.rating)
-     expect(page).to have_content(@review_7.username)
+     expect(page).to have_content(@review_7.user.username)
+
      expect(page).to have_content(@review_6.title)
      expect(page).to have_content(@review_6.rating)
-     expect(page).to have_content(@review_6.username)
+     expect(page).to have_content(@review_6.user.username)
    end
 
    within "#bottom-reviews" do
      expect(page).to have_content(@review_1.title)
      expect(page).to have_content(@review_1.rating)
-     expect(page).to have_content(@review_1.username)
+     expect(page).to have_content(@review_1.user.username)
+
      expect(page).to have_content(@review_5.title)
      expect(page).to have_content(@review_5.rating)
-     expect(page).to have_content(@review_5.username)
+     expect(page).to have_content(@review_5.user.username)
+
      expect(page).to have_content(@review_2.title)
      expect(page).to have_content(@review_2.rating)
-     expect(page).to have_content(@review_2.username)
+     expect(page).to have_content(@review_2.user.username)
    end
+ end
+
+ it "displays a link to add a new review for that book, which takes visitor to a new review path when clicked on" do
+   visit book_path(@book_1)
+
+   click_link "Write a Review"
+
+   expect(current_path).to eq(new_book_review_path(@book_1))
  end
 end
