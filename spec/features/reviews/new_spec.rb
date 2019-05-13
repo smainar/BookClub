@@ -16,7 +16,7 @@ RSpec.describe "new review form", type: :feature do
       visit new_book_review_path(@book_1)
 
       fill_in "review[title]", with: "Hello"
-      fill_in "review[name]", with: "User 42"
+      fill_in "review[user]", with: "User 42"
       select("5", from: "review[rating]")
       fill_in "review[text]", with: "Hello World"
       click_on "Submit Review"
@@ -35,7 +35,7 @@ RSpec.describe "new review form", type: :feature do
       visit new_book_review_path(@book_1)
 
       fill_in "review[title]", with: "Hello"
-      fill_in "review[name]", with: "UsER 42"
+      fill_in "review[user]", with: "UsER 42"
       select("5", from: "review[rating]")
       fill_in "review[text]", with: "Hello World"
       click_on "Submit Review"
@@ -50,7 +50,7 @@ RSpec.describe "new review form", type: :feature do
       visit new_book_review_path(@book_1)
 
       fill_in "review[title]", with: "Hello"
-      fill_in "review[name]", with: @review_1.user.username
+      fill_in "review[user]", with: @review_1.user.username
       select("5", from: "review[rating]")
       fill_in "review[text]", with: "Hello World"
       click_on "Submit Review"
@@ -64,7 +64,7 @@ RSpec.describe "new review form", type: :feature do
       visit new_book_review_path(@book_1)
 
       fill_in "review[title]", with: ""
-      fill_in "review[name]", with: "User 42"
+      fill_in "review[user]", with: "User 42"
       select("5", from: "review[rating]")
       fill_in "review[text]", with: "Hello World"
       click_on "Submit Review"
