@@ -1,0 +1,12 @@
+
+<h1><%= @user.username %></h1>
+<% @user.reviews.each do |review| %>
+<section id="review-<%= review.id %>">
+  <h2><%= review.title %></h2>
+  <p> <%= review.book.title %></p>
+  <p> <%= review.book.cover_image %></p>
+  <p><%= review.text %></p>
+  <p><%= review.rating %></p>
+  <p><%= review.created_at.to_formatted_s(:long).slice(0...-6) %></p>
+  </section>
+<% end %>
