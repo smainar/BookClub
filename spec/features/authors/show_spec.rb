@@ -80,8 +80,22 @@ RSpec.describe "author show page", type: :feature do
       expect(page).to_not have_content(@review_2.title)
     end
   end
-# As a visitor
-# With the exception of a user's show page,
-# Anywhere I see a user's name on the site for a book review,
-# I can click on the name to go to that user's show page.
+
+  it "the user names(s) are a link, which takes the visitor to that user's show page" do
+    visit author_path(@author_1)
+    
+    within "#top-rated-review-#{@book_1.id}" do
+      click_link @user_2.username
+
+      expect(current_path).to eq(user_path(@user_2))
+    end
+
+    visit author_path(@author_1)
+
+    within "#top-rated-review-#{@book_2.id}" do
+      click_link @user_3.username
+
+      expect(current_path).to eq(user_path(@user_3))
+    end
+  end
 end

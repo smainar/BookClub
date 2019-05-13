@@ -98,4 +98,41 @@ RSpec.describe "book show page", type: :feature do
 
    expect(current_path).to eq(new_book_review_path(@book_1))
  end
+
+ it "the author names(s) are a link, which takes the visitor to that author's show page" do
+   visit book_path(@book_1)
+
+   within "#author-#{@author_1.id}" do
+     click_link @author_1.name
+
+     expect(current_path).to eq(author_path(@author_1))
+   end
+
+   visit book_path(@book_1)
+
+   within "#author-#{@author_2.id}" do
+     click_link @author_2.name
+
+     expect(current_path).to eq(author_path(@author_2))
+   end
+ end
+
+ it "the user names(s) are a link, which takes the visitor to that user's show page" do
+   visit book_path(@book_1)
+
+   within "#review-info-#{@review_1.id}" do
+     click_link @user_1.username
+
+     expect(current_path).to eq(user_path(@user_1))
+   end
+
+   visit book_path(@book_1)
+
+   within "#review-info-#{@review_2.id}" do
+     click_link @user_2.username
+
+     expect(current_path).to eq(user_path(@user_2))
+   end
+ end
+
 end
