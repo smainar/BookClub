@@ -80,5 +80,8 @@ RSpec.describe "author show page", type: :feature do
       expect(page).to_not have_content(@review_2.title)
     end
   end
-
+# As a visitor
+# With the exception of a user's show page,
+# Anywhere I see a user's name on the site for a book review,
+# I can click on the name to go to that user's show page.
 end

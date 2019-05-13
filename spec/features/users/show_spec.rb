@@ -51,8 +51,8 @@ RSpec.describe "user show page", type: :feature do
         expect(page).to have_content(@review_1.text)
         expect(page).to have_content(@book_1.title)
         expect(page).to have_content(@review_1.rating)
-        expect(page).to have_content(@book_1.cover_image)
-        # expect(page).to have_content(DATE/TIME)
+        expect(page).to have_css("img[src='#{@book_1.cover_image}']")
+        expect(page).to have_content(@review_1.created_at.to_formatted_s(:long).slice(0...-6))
 
         expect(page).to_not have_content(@review_2.title)
         expect(page).to_not have_content(@review_2.text)
@@ -64,8 +64,8 @@ RSpec.describe "user show page", type: :feature do
         expect(page).to have_content(@review_4.text)
         expect(page).to have_content(@book_2.title)
         expect(page).to have_content(@review_4.rating)
-        expect(page).to have_content(@book_2.cover_image)
-        # expect(page).to have_content(DATE/TIME)
+        expect(page).to have_css("img[src='#{@book_2.cover_image}']")
+        expect(page).to have_content(@review_4.created_at.to_formatted_s(:long).slice(0...-6))
 
         expect(page).to_not have_content(@review_5.title)
         expect(page).to_not have_content(@review_5.text)
