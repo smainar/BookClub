@@ -7,7 +7,7 @@ class ReviewsController < ApplicationController
 
   def create
     book = Book.find(params[:book_id])
-    user = User.find_or_create_by(username: params[:review][:name].strip.downcase.titleize)
+    user = User.find_or_create_by(username: params[:review][:user].strip.downcase.titleize)
     review = user.reviews.new(review_params)
     if book.repeat_user(user.id) || review_params.values.include?("") || user.username == ""
       flash.notice = "Error."
