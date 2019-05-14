@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get '/random_background.jpg', to: 'background#image'
   get '/', to: 'welcome#index'
   
-  resources :books, only: [:index, :show, :new, :create] do
+  resources :books, only: [:index, :show, :new, :create, :destroy] do
     resources :reviews, only: [:new, :create]
   end
   resources :authors, only: [:show, :destroy]
