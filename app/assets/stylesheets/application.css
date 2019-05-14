@@ -13,6 +13,40 @@
  *= require_tree .
  *= require_self
  */
+ body {
+   font-family:'Exo';
+ }
+
+ body.welcome {
+   font-family: 'Pacifico';
+   background-size:cover;
+   background-attachment:fixed;
+   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("family_reading.jpg");
+   background-position: center top;
+   text-align: center;
+   font-size: 36px;
+   color: white;
+   text-shadow: 2px 4px 4px black;
+ }
+
+ .button {
+  background-color: orange;
+  border: 2px solid white;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-shadow: none;
+  font-family: 'Exo';
+  box-shadow: 0 2px 2px rgba(0,0,0,.2);
+  display: inline-block;
+  font-size: 20px;
+  border-radius: .5em;
+  text-decoration:none;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+}
+.button:hover {
+  background-color: orangered;
+}
 
  ul#books_list {
    list-style-type:none;
