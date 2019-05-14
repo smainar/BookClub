@@ -15,6 +15,7 @@ Review.destroy_all
 BookAuthor.destroy_all
 Author.destroy_all
 Book.destroy_all
+User.destroy_all
 
 a1 = Author.create(name: "RL Stein")
 a2 = Author.create(name: "John Foreman")
