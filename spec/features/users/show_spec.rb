@@ -145,11 +145,11 @@ RSpec.describe "user show page", type: :feature do
     it "deletes a single review the user has written" do
       visit user_path(@user_1)
 
-      within "#review-#{@review_4.id}" do
-        expect(page).to have_content(@review_4.title)
+      within "#review-#{@review_3.id}" do
+        expect(page).to have_content(@review_3.title)
         click_on "Delete this Review"
       end
-      expect(page).to_not have_content(@review_4.title)
+      expect(page).to_not have_content(@review_3.title)
     end
   end
 end
