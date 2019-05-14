@@ -1,16 +1,4 @@
 require 'rails_helper'
-# As a Visitor,
-# When I click on a user's name for any book review
-# I am taken to a show page for that user.
-# I should see all reviews that this
-# user has written.
-# Each review shows:
-# - the title of the review
-# - the description of the review
-# - the rating of the review
-# - the title of the book
-# - the thumbnail image for the book
-# - the date the review was written
 
 RSpec.describe "user show page", type: :feature do
   before(:each) do
@@ -71,6 +59,16 @@ RSpec.describe "user show page", type: :feature do
         expect(page).to_not have_content(@review_5.text)
         expect(page).to_not have_content(@book_3.title)
       end
+    end
+
+    it "deletes a single review the user has written" do
+      visit user_path(@user_1)
+
+      within "#review-#{@review_4.id}" do
+        expect(page).to have_content(@review_4.title)
+        click_on "Delete this Review"
+      end
+      expect(page).to_not have_content(@review_4.title)
     end
   end
 end
