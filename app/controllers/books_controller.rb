@@ -30,6 +30,9 @@ class BooksController < ApplicationController
     else
       book = Book.new(book_params)
       book.update(title: book_title)
+      if book.cover_image == ""
+        book.cover_image = "/assets/book_default.png"
+      end
       authors = author_params[:authors].titleize.split(", ")
       authors.each do |author|
         book.authors << Author.find_or_create_by(name: author)

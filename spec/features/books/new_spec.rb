@@ -23,6 +23,23 @@ RSpec.describe "new book form", type: :feature do
     expect(page).to have_content(new_book.authors.first.name)
   end
 
+  it "creates book with default image when no image url is given" do
+    visit new_book_path
+
+    fill_in "book[title]", with: "the talisman"
+    fill_in "book[publication_year]", with: 1984
+    fill_in "book[pages]", with: 921
+    fill_in "book[authors]", with: "stephen king, peter straub"
+
+    click_on "Create Book"
+
+    new_book = Book.last
+
+    expect(current_path).to eq(book_path(new_book))
+    
+    expect(page).to have_css("img[src='#{new_book.cover_image}']")
+  end
+
   it "displays flash notice when there is an invalid page entry" do
     visit new_book_path
 

@@ -4,7 +4,7 @@
 <% end %>
   <p>Publication Year: <%= @book.publication_year %></p>
   <p>Pages: <%= @book.pages %></p>
-  <img src="<%= @book.cover_image %>" alt= "<%= @book.title %>" height="150" width="100"/>
+  <img src=<%= @book.cover_image %> alt= "<%= @book.title %>" height="150" width="100"/>
 
 <h2>Reviews</h2>
 <p><%= link_to "Write a Review", new_book_review_path(@book) %></p>
