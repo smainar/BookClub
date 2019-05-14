@@ -6,6 +6,8 @@ RSpec.describe "book show page", type: :feature do
     @book_2 = Book.create!(title: "Book 2", publication_year: 2000, pages: 105, cover_image: "book2.png")
     @book_3 = Book.create!(title: "Book 3", publication_year: 2001, pages: 110, cover_image: "book3.png")
 
+    @books = Book.all
+
     @author_1 = @book_1.authors.create!(name: "Author 1")
     @author_2 = @book_1.authors.create!(name: "Author 2")
     @author_3 = @book_2.authors.create!(name: "Author 3")
@@ -24,6 +26,8 @@ RSpec.describe "book show page", type: :feature do
     @review_5 = @book_1.reviews.create!(user: @user_2, title: "Review Book 1.4", rating: 2, text: "Pretty bad")
     @review_6 = @book_1.reviews.create!(user: @user_4, title: "Review Book 1.5", rating: 4, text: "Fun book")
     @review_7 = @book_1.reviews.create!(user: @user_5, title: "Review Book 1.6", rating: 5, text: "Favorite book")
+
+    @reviews = Review.all
   end
 
   it "displays the title, author, and page count for a specific book" do
@@ -135,4 +139,30 @@ RSpec.describe "book show page", type: :feature do
    end
  end
 
+ it "displays a link on the page to delete the book" do
+   visit book_path(@book_1)
+
+   click_on "Delete this Book"
+
+   expect(current_path).to eq(books_path)
+   expect(@books).to_not include(@book_1)
+   expect(@books).to include(@book_2)
+   expect(@books).to include(@book_3)
+ end
+
+ it "deletes the book's reviews when you click on 'Delete this Book'" do
+   visit book_path(@book_1)
+
+   click_on "Delete this Book"
+
+   within "#books_list" do
+     expect(current_path).to eq(books_path)
+     expect(page).to_not have_content(@review_1.title)
+     expect(page).to_not have_content(@review_2.title)
+     expect(page).to_not have_content(@review_4.title)
+     expect(page).to_not have_content(@review_5.title)
+     expect(page).to_not have_content(@review_6.title)
+     expect(page).to_not have_content(@review_7.title)
+   end
+ end
 end
