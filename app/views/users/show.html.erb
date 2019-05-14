@@ -1,6 +1,10 @@
 <h1><%= @user.username %></h1>
-<% @user.reviews.each do |review| %>
+<p><a class="button" href="<%= user_path(@user) + "?order_by_date=recent" %>">Most Recent - Reviews</a></p>
+<p><a class="button" href="<%= user_path(@user) + "?order_by_date=oldest" %>">Oldest - Reviews</a></p>
+
+<% @reviews.each do |review| %>
 <section id="review-<%= review.id %>">
+
   <h2><%= review.title %></h2>
   <p> <%= review.book.title %></p>
   <img src="<%= review.book.cover_image %>" alt= "<%= review.book.title %>" height="150" width="100"/>
