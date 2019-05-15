@@ -14,7 +14,7 @@ RSpec.describe User, type: :model do
       @book_1 = Book.create!(title: "Book 1", publication_year: 1999, pages: 100, cover_image: "book1.png")
       @book_2 = Book.create!(title: "Book 2", publication_year: 2000, pages: 105, cover_image: "book2.png")
       @book_3 = Book.create!(title: "Book 3", publication_year: 2001, pages: 110, cover_image: "book3.png")
-      
+
       @author_1 = @book_1.authors.create!(name: "Author 1")
       @author_2 = @book_1.authors.create!(name: "Author 2")
       @author_3 = @book_2.authors.create!(name: "Author 3")
@@ -77,6 +77,11 @@ RSpec.describe User, type: :model do
     it "order_reviews" do
       expect(@user_1.order_reviews("recent")).to eq([@review_5, @review_1, @review_3])
       expect(@user_2.order_reviews("oldest")).to eq([@review_2, @review_4])
+    end
+
+    it "reviews_count" do
+      expect(@user_1.review_count).to eq(3)
+      expect(@user_2.review_count).to eq(2)
     end
   end
 end
