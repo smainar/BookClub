@@ -27,6 +27,7 @@ a7 = Author.create(name: "HG Wells")
 a8 = Author.create(name: "Nate Silver")
 a9 = Author.create(name: "Wes McKinney")
 a10 = Author.create(name: "John Smith")
+a11 = Author.create(name: "John Steinbeck")
 
 b1 = Book.create(title: "The New Machiavelli", publication_year: 1911, pages:180, cover_image: "https://pictures.abebooks.com/isbn/9780140005752-uk.jpg", authors: [a7])
 b2 = Book.create(title: "Data Smart", publication_year: 2013, pages: 235, cover_image: "https://images-na.ssl-images-amazon.com/images/I/41ex8HFBWnL._SX397_BO1,204,203,200_.jpg", authors: [a2])
@@ -39,6 +40,7 @@ b8 = Book.create(title: "Harry Potter & the Prisoner of Azkaban", publication_ye
 b9 = Book.create(title: "The Signal and the Noise", publication_year: 2015, pages: 233, cover_image: "https://images-na.ssl-images-amazon.com/images/I/51NDG49sWcL._SX324_BO1,204,203,200_.jpg", authors: [a8])
 b10 = Book.create(title: "Python for Data Analysis", publication_year: 2017, pages: 233, cover_image: "https://images-na.ssl-images-amazon.com/images/I/51cUNf8zukL._SX379_BO1,204,203,200_.jpg", authors: [a9,a10])
 b11 = Book.create(title: "Orientalism", publication_year:1979, pages:197, cover_image: "https://upload.wikimedia.org/wikipedia/en/thumb/5/50/Orientalism%2C_first_edition.jpg/220px-Orientalism%2C_first_edition.jpg", authors: [a5,a10])
+b12 = Book.create(title: "Of Mice and Men", publication_year:1937, pages:187, cover_image: "https://www-tc.pbs.org/wgbh/americanexperience/media/filer_public_thumbnails/filer_public/93/f5/93f50927-50b0-4bb0-b6ba-2845eb326f16/micemen-feature-new.jpg__350x581_q85_crop_subsampling-2_upscale.jpg", authors: [a11])
 
 u1 = User.create(username: "whiner")
 u2 = User.create(username: "Alexander")
@@ -67,3 +69,4 @@ r12 = b8.reviews.create(user: u10, title: "Lord of Rings was better!", rating: 1
 r13 = b9.reviews.create(user: u4,title: "Statistics in Context + Important Key Takeaways",rating: 4, text: "The author Nate Silver does a great job weaving more technical statistical concepts in context early in the book, so as not to lose readers early on. However I thought this would lead to more a detailed technical discussion later on, which the author said it would, but it never really transpired. Instead he kept to analogies and keeping the science of prediction in context. Which there's really nothing wrong with, if you're someone looking for that ... just not exactly what I wanted or expected.")
 r14 = b10.reviews.create(user: u2,title: "less than what I had hoped",rating: 3, text: "This book falls somewhere between a manual page providing one example per function and a cookbook, tending more toward the former. Examples are dry and most are constructed using random data. There is very little in the way of practical use cases. I bought the book hoping to get some inspiration for using numpy and/or pandas for some types of analyses I find myself doing, but that didn't happen. Probably I've gathered enough overview that I now can put together useful queries that will provide useful hits on Stack Exchange. I wish I had better to say.")
 r15 = b11.reviews.create(user: u11,title: "Painful to read, only an academic could tolerate this",rating: 2, text: "Horribly painful to read. His thesis is clear from the introduction. Three hundred pages of documentation for the thesis is excessive. This is ivory tower gum flapping. You will get more from reading other reader's summaries and analysis, rather than suffering thru this on your own. I had to read it for class, otherwise I never would have. Read the summaries you can find elsewhere and you'll get the gist. Don't torture yourself. Nonetheless, his point is valid and insightful, just drowned in excessive detail and support. Just take his word for it and save yourself the hours required.")
+r16 = b12.reviews.create(user: u8,title: "Really Excellent.", rating: 5, text: "See, now here is a book with a good story and a writing style that draws you in. ne of my favorites, Right behind Robinson Crusoe.")
