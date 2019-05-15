@@ -1,3 +1,4 @@
+<body class="index">
 <h1><%= @book.title %></h1>
 <% @book.authors.each do |author| %>
   <p id="author-<%= author.id %>">By: <%= link_to author.name, author_path(author) %></p>
@@ -35,3 +36,4 @@
         <h4><%= review.title %> (<%= review.rating %>)</h4>
       <% end %>
     </section>
+</body>

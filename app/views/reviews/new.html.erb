@@ -1,17 +1,19 @@
+<body class="index">
 <h1>New Review</h1>
 
 <%= form_for [@book, @review] do |f| %>
   <%= f.label :title %>
-  <%= f.text_field :title %>
+  <%= f.text_field :title %><br>
 
   <%= f.label :username %>
-  <%= f.text_field :user %>
+  <%= f.text_field :user %><br>
 
   <%= f.label :rating %>
-  <%= f.select :rating, (1..5) %>
+  <%= f.select :rating, (1..5) %><br>
 
   <%= f.label :text %>
-  <%= f.text_field :text %>
+  <%= f.text_field :text %><br>
 
   <%= f.submit "Submit Review" %>
 <% end %>
+</body>

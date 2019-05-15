@@ -1,3 +1,4 @@
+<body class="index">
 <h1><%= @author.name %></h1>
 <% @author.books.each do |book| %>
   <section id="book-<%= book.id %>">
@@ -18,3 +19,4 @@
   </section>
 <% end %>
 <p><%= link_to 'Delete this Author', author_path(@author), method: :delete %></p>
+</body>
