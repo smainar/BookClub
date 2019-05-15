@@ -1,20 +1,22 @@
+<body class="index">
 <h1>New Book</h1>
 
 <%= form_for @book do |f| %>
   <%= f.label :title %>
-  <%= f.text_field :title %>
+  <%= f.text_field :title %><br>
 
   <%= f.label :publication_year %>
-  <%= f.number_field :publication_year %>
+  <%= f.number_field :publication_year %><br>
 
   <%= f.label :pages %>
-  <%= f.number_field :pages %>
+  <%= f.number_field :pages %><br>
 
   <%= f.label :cover_image %>
-  <%= f.url_field :cover_image %>
+  <%= f.url_field :cover_image %><br>
 
   <%= f.label :authors %>
-  <%= f.text_field :authors, :value => "" %>
+  <%= f.text_field :authors, :placeholder=> "author, author2, author3...", :value => "" %><br>
 
   <%= f.submit %>
 <% end %>
+</body>

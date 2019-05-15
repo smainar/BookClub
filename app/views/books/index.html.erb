@@ -10,26 +10,26 @@
     <li class="nav_bar"><a href='/books?order_by_pages=desc'>Page Number descending</a></li>
   </ul>
 <body class="index">
-
-<h2>Book List</h2>
+<style>*{text-decoration:none; color:white; text-shadow:2px 4px 4px rgba(0, 0, 0, 0.7);}</style>
+<h1>Book List</h1>
 <section id="books_list">
-  <div class="column">
   <% @books.each do |book| %>
+  <li class="column">
      <section id='book-<%= book.id %>' >
-        <h2>Title: <%= link_to book.title, book_path(book) %></h2>
+       <img src=<%= book.cover_image %> alt= "<%= book.title %>" height="300" width="200" /><br>
+        <%= link_to book.title, book_path(book) %><br>
         <% book.authors.each do |author| %>
-          <p>By: <%= link_to author.name, author_path(author) %></p>
+          By: <%= link_to author.name, author_path(author) %><br>
         <% end %>
-        <p>Publication Year: <%= book.publication_year %></p>
-        <p>Pages: <%= book.pages %></p>
-        <p>Reviews: <%= book.review_count %></p>
-        <p>Average Rating: <%= book.average_rating.to_f.round(1) %></p>
-        <img src=<%= book.cover_image %> alt= "<%= book.title %>" height="150" width="100" />
+        <div>Publication Year: <%= book.publication_year %><br>
+        Pages: <%= book.pages %><br>
+        Reviews: <%= book.review_count %><br>
+        Average Rating: <%= book.average_rating.to_f.round(1) %></div>
       </section>
+    </li>
   <% end %>
-  </div>
 
-<h2>Statistics</h2>
+<h1>Statistics</h1>
   <section class='statistics-highest-rated-book-'>
 <h3>Highest Rated Books (Top 3):</h3>
     <% @highest_rated_books.each do |book| %>
