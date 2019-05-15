@@ -2,6 +2,7 @@ class BooksController < ApplicationController
   def index
     @highest_rated_books = Book.highest_rated_books
     @worst_rated_books = Book.worst_rated_books
+    @top_reviewers = User.top_reviewers
     if params[:order_by_rating]
       @books = Book.order_average_rating(params[:order_by_rating])
     elsif params[:order_by_reviews]
