@@ -196,7 +196,6 @@ RSpec.describe "books index page", type: :feature do
       expect(page).to have_content(user_1.review_count)
       expect(page).to have_link(user_3.username)
       expect(page).to have_content(user_3.review_count)
-      expect(page).to_not have_link(user_4.username)
     end
   end
 
