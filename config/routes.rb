@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # get '/books', to: 'books#index'
   get '/random_background.jpg', to: 'background#image'
-  get '/', to: 'welcome#index'
-  
+  root to: 'welcome#index'
+
   resources :books, only: [:index, :show, :new, :create, :destroy] do
     resources :reviews, only: [:new, :create]
   end
