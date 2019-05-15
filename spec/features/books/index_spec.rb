@@ -60,17 +60,23 @@ RSpec.describe "books index page", type: :feature do
 
     click_on "Average Rating ascending"
     expect(current_path).to eq(books_path)
-    expect(page.all('li')[0]).to have_content(@book_3.title)
-    expect(page.all('li')[1]).to have_content(@book_1.title)
-    expect(page.all('li')[2]).to have_content(@book_2.title)
+
+    within "#books_list" do
+      expect(page.all('li')[0]).to have_content(@book_3.title)
+      expect(page.all('li')[1]).to have_content(@book_1.title)
+      expect(page.all('li')[2]).to have_content(@book_2.title)
+    end
 
     visit books_path
 
     click_on "Average Rating descending"
     expect(current_path).to eq(books_path)
-    expect(page.all('li')[0]).to have_content(@book_2.title)
-    expect(page.all('li')[1]).to have_content(@book_1.title)
-    expect(page.all('li')[2]).to have_content(@book_3.title)
+
+    within "#books_list" do
+      expect(page.all('li')[0]).to have_content(@book_2.title)
+      expect(page.all('li')[1]).to have_content(@book_1.title)
+      expect(page.all('li')[2]).to have_content(@book_3.title)
+    end
   end
 
   it "displays all books sorted by number of reviews" do
@@ -84,17 +90,23 @@ RSpec.describe "books index page", type: :feature do
 
     click_on "Number of Reviews ascending"
     expect(current_path).to eq(books_path)
-    expect(page.all('li')[0]).to have_content(@book_2.title)
-    expect(page.all('li')[1]).to have_content(@book_1.title)
-    expect(page.all('li')[2]).to have_content(@book_3.title)
+
+    within "#books_list" do
+      expect(page.all('li')[0]).to have_content(@book_2.title)
+      expect(page.all('li')[1]).to have_content(@book_1.title)
+      expect(page.all('li')[2]).to have_content(@book_3.title)
+    end
 
     visit books_path
 
     click_on "Number of Reviews descending"
     expect(current_path).to eq(books_path)
-    expect(page.all('li')[0]).to have_content(@book_3.title)
-    expect(page.all('li')[1]).to have_content(@book_1.title)
-    expect(page.all('li')[2]).to have_content(@book_2.title)
+
+    within "#books_list" do
+      expect(page.all('li')[0]).to have_content(@book_3.title)
+      expect(page.all('li')[1]).to have_content(@book_1.title)
+      expect(page.all('li')[2]).to have_content(@book_2.title)
+    end
   end
 
   it "displays all books sorted by page count" do
@@ -102,17 +114,23 @@ RSpec.describe "books index page", type: :feature do
 
     click_on "Page Number ascending"
     expect(current_path).to eq(books_path)
-    expect(page.all('li')[0]).to have_content(@book_1.title)
-    expect(page.all('li')[1]).to have_content(@book_2.title)
-    expect(page.all('li')[2]).to have_content(@book_3.title)
+
+    within "#books_list" do
+      expect(page.all('li')[0]).to have_content(@book_1.title)
+      expect(page.all('li')[1]).to have_content(@book_2.title)
+      expect(page.all('li')[2]).to have_content(@book_3.title)
+    end
 
     visit books_path
 
     click_on "Page Number descending"
     expect(current_path).to eq(books_path)
-    expect(page.all('li')[0]).to have_content(@book_3.title)
-    expect(page.all('li')[1]).to have_content(@book_2.title)
-    expect(page.all('li')[2]).to have_content(@book_1.title)
+
+    within "#books_list" do
+      expect(page.all('li')[0]).to have_content(@book_3.title)
+      expect(page.all('li')[1]).to have_content(@book_2.title)
+      expect(page.all('li')[2]).to have_content(@book_1.title)
+    end
   end
 
   it "displays a statistics area with the three highest-rated and worst-rated books - with book title and average rating" do
