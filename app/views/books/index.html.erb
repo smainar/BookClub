@@ -45,5 +45,11 @@
       <p>Average Rating: <%= book.average_rating.to_f.round(1) %></p>
     <% end %>
   </section>
-
+  <h3>Users with the Most Reviews:</h3>
+  <section id='statistics-most-user-reviews'>
+    <% @top_reviewers.each do |user| %>
+      <p>Username: <%= link_to user.username, user_path(user) %></p>
+      <p>Reviews: <%= user.review_count %></p>
+    <% end %>
+  </section>
 </body>

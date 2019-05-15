@@ -10,4 +10,12 @@ class User < ApplicationRecord
       reviews.order(created_at: :desc)
     end
   end
+
+  def review_count
+    reviews.count
+  end
+
+  def self.top_reviewers
+    joins(:reviews).group(:id).order('reviews.count DESC').limit(3)
+  end
 end
