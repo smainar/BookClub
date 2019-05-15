@@ -1,7 +1,7 @@
   <ul class="nav_bar">
-    <li class="nav_bar"><a class = "active" href='<% root_path %>'>Home</a></li>
-    <li class="nav_bar"><a href='<% books_path %>'>Book List</a></li>
-    <li class="nav_bar"><a href='<%= new_book_path %>'>Add New Book</a></li>
+    <li class="nav_bar"><a class = "active" href='/'>Home</a></li>
+    <li class="nav_bar"><a href='/books'>Book List</a></li>
+    <li class="nav_bar"><a href='/books/new'>Add New Book</a></li>
     <li class="nav_bar"><a href='/books?order_by_rating=asc'>Average Rating ascending</a></li>
     <li class="nav_bar"><a href='/books?order_by_rating=desc'>Average Rating descending</a></li>
     <li class="nav_bar"><a href='/books?order_by_reviews=asc'>Number of Reviews ascending</a></li>
@@ -9,12 +9,12 @@
     <li class="nav_bar"><a href='/books?order_by_pages=asc'>Page Number ascending</a></li>
     <li class="nav_bar"><a href='/books?order_by_pages=desc'>Page Number descending</a></li>
   </ul>
-<body class="books_index">
+<body class="index">
 
 <h2>Book List</h2>
-<ul id="books_list">
+<section id="books_list">
+  <div class="column">
   <% @books.each do |book| %>
-    <li>
      <section id='book-<%= book.id %>' >
         <h2>Title: <%= link_to book.title, book_path(book) %></h2>
         <% book.authors.each do |author| %>
@@ -26,9 +26,8 @@
         <p>Average Rating: <%= book.average_rating.to_f.round(1) %></p>
         <img src=<%= book.cover_image %> alt= "<%= book.title %>" height="150" width="100" />
       </section>
-    </li>
   <% end %>
-</ul>
+  </div>
 
 <h2>Statistics</h2>
   <section class='statistics-highest-rated-book-'>

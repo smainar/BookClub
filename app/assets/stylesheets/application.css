@@ -17,15 +17,16 @@
    font-family:'Exo';
  }
 
- .books_index {
-   font-family: 'Pacifico';
+ body.index {
+   font-family: 'Exo';
    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/random_background.jpg) fixed;
    background-size:cover;
    background-position: center top;
    text-align: center;
-   font-size: 36px;
+   font-size: 18px;
    color: rgba(200, 255, 200, 0.9);
    text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.7);
+   display: grid;
  }
 
  body.welcome {
@@ -56,6 +57,17 @@
 }
 .button:hover {
   background: rgba(200, 51, 19, 0.7);
+}
+
+.column {
+  float: left;
+  width: 24.33%;
+  padding: 20px;
+  font-size: 25px;
+  text-decoration:none;
+  cursor: pointer;
+  color: white;
+  display: table;
 }
 
  ul#books_list {
